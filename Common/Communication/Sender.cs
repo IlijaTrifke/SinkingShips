@@ -1,0 +1,22 @@
+﻿using System.Net.Sockets;
+using System.Runtime.Serialization.Formatters.Binary;
+
+namespace Common.Communication
+{
+    public class Sender
+    {
+        Socket socket;
+        NetworkStream stream;
+        BinaryFormatter formatter;
+        public Sender(Socket socket)
+        {
+            this.socket = socket;
+            stream = new NetworkStream(socket);
+            formatter = new BinaryFormatter();
+        }
+        public void Send(object Argument)
+        {
+            formatter.Serialize(stream, Argument);
+        }
+    }
+}
